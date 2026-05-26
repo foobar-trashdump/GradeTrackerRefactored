@@ -64,14 +64,17 @@ public class ReportPrinter {
         printSeparatorLine();
         System.out.println("                   CLASS STATISTICS REPORT                    ");
         printSeparatorLine();
-        System.out.println("   Total Students:  " + repo.getCount());
+        System.out.printf("   %-22s %d%n", "Total Students:", repo.getCount());
         System.out.println("---------------------------------------------------------------");
-        System.out.println("   Highest Raw Grade:   " + repo.getStudent(highestIndex).getName() +
-                " (" + String.format("%.2f", highest) + ") - Rank: " + calculator.assignLetterRank(highest) + "-tier");
-        System.out.println("   Lowest Raw Grade:    " + repo.getStudent(lowestIndex).getName() +
-                " (" + String.format("%.2f", lowest) + ") - Rank: " + calculator.assignLetterRank(lowest) + "-tier");
-        System.out.println("   Class Mean:          " + String.format("%.2f", sum / repo.getCount()) +
-                " - Rank: " + calculator.assignLetterRank(sum / repo.getCount()) + "-tier");
+        String highestInfo = String.format("%s (%.2f) - Rank: %s-tier",
+                repo.getStudent(highestIndex).getName(), highest, calculator.assignLetterRank(highest));
+        String lowestInfo = String.format("%s (%.2f) - Rank: %s-tier",
+                repo.getStudent(lowestIndex).getName(), lowest, calculator.assignLetterRank(lowest));
+        String meanInfo = String.format("%.2f - Rank: %s-tier",
+                (sum / repo.getCount()), calculator.assignLetterRank(sum / repo.getCount()));
+        System.out.printf("   %-22s %s%n", "Highest Raw Grade:", highestInfo);
+        System.out.printf("   %-22s %s%n", "Lowest Raw Grade:", lowestInfo);
+        System.out.printf("   %-22s %s%n", "Class Mean:", meanInfo);
         printSeparatorLine();
     }
 }
